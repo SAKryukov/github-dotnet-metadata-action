@@ -2,11 +2,13 @@
   <Import Project="$(MSBuildThisFileDirectory)../../code/Metadata.props"/>
 
   <PropertyGroup> <!-- customize:  -->
+  
+    <FileName>Test.full-build.zip</FileName>
 
-    <ReleaseTagName>+latest-build</ReleaseTagName>
-    <ReleaseName>Latest release build</ReleaseName>
-    <ReleaseBody>This release is a container for executable builds packaged in *.full-build.zip files</ReleaseBody>
-    <ReleaseFileName>Test.$(CustomUnifiedVersion).full-build.zip</ReleaseFileName>
+    <ReleaseTagName>latest-build</ReleaseTagName>
+    <ReleaseName>Latest release build: $(CustomUnifiedVersion)</ReleaseName>
+    <ReleaseBody>This release is a container for executable builds packaged in the $(FileName) file</ReleaseBody>
+    <ReleaseFileName>$(FileName)</ReleaseFileName>
 
   </PropertyGroup>
 
