@@ -1,6 +1,9 @@
 name: .NET Build # 2
 run-name: Build #${{ github.run_number }} # This sets the clean name on the Actions page
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     paths:
