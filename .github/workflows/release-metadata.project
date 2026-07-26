@@ -4,7 +4,7 @@
   <PropertyGroup> <!-- customize:  -->
 
     <ReleaseTagName>latest-build</ReleaseTagName>
-    <ReleaseName>Latest release build</Name>
+    <ReleaseName>Latest release build</ReleaseName>
     <ReleaseBody>Latest release build body text</ReleaseBody>
     <ReleaseFileName>Test.$(CustomUnifiedVersion).zip</ReleaseFileName>
 
