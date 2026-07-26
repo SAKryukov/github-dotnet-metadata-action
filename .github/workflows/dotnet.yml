@@ -28,17 +28,21 @@ jobs:
       working-directory: ./code
       run: |
         dotnet build -c Release
+        
+    - name: Prepare metadata 
+      working-directory: ./.github/workflows
+      run: |
+        dotnet build metadata.targets --target:Metadata
 
     - name: Package Application Binaries (Native PowerShell)
       shell: powershell
       run: |
-        Compress-Archive -Path ./code/output.AnyCPU.Release/* -DestinationPath ./Menu-controls.zip
+        Compress-Archive -Path ./code/output.AnyCPU.Release/* -DestinationPath ${{ ReleaseFileName }}
 
     - name: Publish to GitHub Releases
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: latest
-        name: Build of the latest version
-        body: |
-          Radically fixed Menu and ContextMenu controls
-        files: ./Menu-controls.zip
+        tag_name: ${{ ReleaseTagName }}
+        name: ${{ ReleaseName }}
+        body: ${{ ReleaseBody }}
+        files: ${{ ReleaseFileName }}

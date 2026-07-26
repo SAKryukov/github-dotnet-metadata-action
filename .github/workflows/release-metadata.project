@@ -1,0 +1,14 @@
+<Project>
+  <Import Project="$(MSBuildThisFileDirectory)../../code/Metadata.props"/>
+
+  <PropertyGroup> <!-- customize:  -->
+
+    <ReleaseTagName>latest-build</ReleaseTagName>
+    <ReleaseName>Latest release build</Name>
+    <ReleaseBody>Latest release build body text</ReleaseBody>
+    <ReleaseFileName>Test.$(CustomUnifiedVersion).zip</ReleaseFileName>
+
+  </PropertyGroup>
+
+</Project>
+
