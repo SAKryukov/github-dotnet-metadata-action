@@ -37,12 +37,12 @@ jobs:
     - name: Package Application Binaries (Native PowerShell)
       shell: powershell
       run: |
-        Compress-Archive -Path ./code/output.AnyCPU.Release/* -DestinationPath ${{ ReleaseFileName }}
+        Compress-Archive -Path ./code/output.AnyCPU.Release/* -DestinationPath ${{ env.ReleaseFileName }}
 
     - name: Publish to GitHub Releases
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ ReleaseTagName }}
-        name: ${{ ReleaseName }}
-        body: ${{ ReleaseBody }}
-        files: ${{ ReleaseFileName }}
+        tag_name: ${{ env.ReleaseTagName }}
+        name: ${{ env.ReleaseName }}
+        body: ${{ env.ReleaseBody }}
+        files: ${{ env.ReleaseFileName }}
