@@ -3,7 +3,7 @@
 
   <PropertyGroup> <!-- customize:  -->
 
-    <ReleaseTagName>latest-build</ReleaseTagName>
+    <ReleaseTagName>+latest-build</ReleaseTagName>
     <ReleaseName>Latest release build</ReleaseName>
     <ReleaseBody>This release is a container for executable builds packaged in *.full-build.zip files</ReleaseBody>
     <ReleaseFileName>Test.$(CustomUnifiedVersion).full-build.zip</ReleaseFileName>
