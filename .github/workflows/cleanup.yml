@@ -23,10 +23,10 @@ jobs:
         run: |
           echo "Purging old historical workflow run records..."
           
-          # 1. Targets 'pages.yml' - Indexes the array directly to preserve only the 1 newest item
-          gh api repos/${{ github.repository }}/actions/workflows/pages.yml/runs --jq '.[1:].id' | \
+          # 1. Targets 'pages.yml' - Safely slices the inner workflow_runs array
+          gh api repos/${{ github.repository }}/actions/workflows/pages.yml/runs --jq '.workflow_runs[1:].id' | \
           xargs -I {} sh -c 'echo "Deleting run {}..."; gh api repos/${{ github.repository }}/actions/runs/{} -X DELETE'
 
-          # 2. Targets 'cleanup.yml' - Indexes the array directly to preserve only the 1 newest item
-          gh api repos/${{ github.repository }}/actions/workflows/cleanup.yml/runs --jq '.[1:].id' | \
+          # 2. Targets 'cleanup.yml' - Safely slices the inner workflow_runs array
+          gh api repos/${{ github.repository }}/actions/workflows/cleanup.yml/runs --jq '.workflow_runs[1:].id' | \
           xargs -I {} sh -c 'echo "Deleting run {}..."; gh api repos/${{ github.repository }}/actions/runs/{} -X DELETE'
