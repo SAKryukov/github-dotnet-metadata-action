@@ -1,0 +1,45 @@
+name: "Pages build and deployment"
+
+on:
+  push:
+    # Trigger 1: Automatically run if any file inside your self-contained folder changes
+    paths:
+      - 'deploy/**'
+    # Trigger 2: Automatically run when pushing tags starting with any digit (e.g., 1.0, 2.4.1-rc1, 3.dev)
+    tags:
+      - '[0-9]*'
+  
+  # Trigger 3: Keeps your manual gray "Run workflow" dashboard button active forever
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # HIGHLIGHT: Instructs the engine to only build from your ./deploy folder
+          path: 'deploy' 
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
