@@ -3,24 +3,30 @@ run-name: "Cleanup Execution Loop #${{ github.run_number }} [Trigger: ${{ github
 
 on:
   push:
-    # Safe structure: looks at the main branch, but targets workflow changes
     branches: [ "main" ]
     paths:
       - '.github/workflows/**'
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0 * * 0' # Runs at 00:00 every Sunday
   workflow_dispatch:
-      
+
 jobs:
   clean-history:
     runs-on: ubuntu-latest
     permissions:
-      actions: write 
+      actions: write # Required to authorize deletion calls
     steps:
-      - name: Delete old runs
-        uses: JuvenileQ/delete-workflow-runs@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          retain_days: 0
-          keep_minimum_runs: 1 # Guarantees your UI buttons never vanish
+      - name: Purge Historical Run Records via Native GitHub CLI
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Fetching historical workflow run IDs..."
+          
+          # 1. Targets 'pages.yml' - keeps only the 1 latest run
+          gh api repos/${{ github.repository }}/actions/workflows/pages.yml/runs --jq '.workflow_runs[1:].id' | \
+          xargs -I {} sh -c 'echo "Deleting run {}..."; gh api repos/${{ github.repository }}/actions/runs/{} -X DELETE'
+
+          # 2. Targets its own file 'cleanup.yml' - keeps only the 1 latest run
+          gh api repos/${{ github.repository }}/actions/workflows/cleanup.yml/runs --jq '.workflow_runs[1:].id' | \
+          xargs -I {} sh -c 'echo "Deleting run {}..."; gh api repos/${{ github.repository }}/actions/runs/{} -X DELETE'
