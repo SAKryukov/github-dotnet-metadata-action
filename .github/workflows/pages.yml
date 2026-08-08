@@ -1,12 +1,10 @@
 name: "Pages build and deployment"
-run-name: "Pages Deploy #${{ github.run_number }} [Ref: ${{ github.ref_name }} via ${{ github.event_name }}]"
+run-name: "Pages Deploy #${{ github.run_number }} [Trigger: ${{ github.event_name }}]"
 
 on:
   push:
-    # Trigger 1: Automatically run if any file inside your self-contained folder changes
     paths:
       - 'deploy/**'
-    # Trigger 2: Automatically run when pushing tags starting with any digit (e.g., 1.0, 2.4.1-rc1, 3.dev)
     tags:
       - '[0-9]*'
   

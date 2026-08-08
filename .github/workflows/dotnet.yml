@@ -1,11 +1,13 @@
 name: .NET Build
-run-name: Build #${{ github.run_number }}
+run-name: Build #${{ github.run_number }} [Trigger: ${{ github.event_name }}]"
 
 on:
   push:
     paths:
-      - '.github/workflows/**'
+      - '.github/workflows/dotnet.yml'
       - 'code/Metadata.props'
+    tags:
+      - '[0-9]*'
   workflow_dispatch:
 
 jobs:
