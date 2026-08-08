@@ -1,4 +1,5 @@
 name: "History and Log Cleanup Engine"
+run-name: "Cleanup Execution Loop #${{ github.run_number }} [Trigger: ${{ github.event_name }}]"
 
 on:
   push:
