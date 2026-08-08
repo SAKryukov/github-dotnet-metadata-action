@@ -1,4 +1,5 @@
 name: "Pages build and deployment"
+run-name: "Pages Deploy #${{ github.run_number }} [Ref: ${{ github.ref_name }} via ${{ github.event_name }}]"
 
 on:
   push:
