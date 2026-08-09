@@ -12,7 +12,6 @@ jobs:
   sync-details:
     runs-on: ubuntu-latest
     permissions:
-      # HIGHLIGHT: Grants the GITHUB_TOKEN administrative rights to update the About panel and Topics
       administration: write
       actions: write
       contents: write
