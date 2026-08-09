@@ -3,7 +3,7 @@
 
   <PropertyGroup> <!-- customize:  -->
   
-    <FileName>Test.full-build.zip</FileName>
+    <FileName>Test.$(CustomUnifiedVersion).zip</FileName>
     <SourceForPages>deploy</SourceForPages>
 
     <ReleaseTagName>latest-build</ReleaseTagName>
