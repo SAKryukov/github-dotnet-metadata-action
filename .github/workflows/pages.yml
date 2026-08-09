@@ -5,6 +5,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
+      - '.github/workflows/pages.yml'
       - 'deploy/**'
     tags:
       - '[0-9]*'
@@ -45,3 +46,19 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  clean-history:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write 
+    steps:
+      - name: Purge Historical Run Records via Native GitHub CLI
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Purging old historical workflow run records safely..."
+          for run_id in $(gh api repos/${{ github.repository }}/actions/workflows/pages.yml/runs | jq -r '.workflow_runs[1:] | .[].id'); do
+            echo "Deleting dotnet run $run_id..."
+            gh api repos/${{ github.repository }}/actions/runs/$run_id -X DELETE || true
+          done

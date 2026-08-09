@@ -7,9 +7,6 @@ on:
     paths:
       - '.github/workflows/cleanup.yml'
   workflow_run:
-    workflows: ["Pages Build and Deployment", ".NET Build"]
-    types:
-      - completed
   workflow_dispatch:
 
 concurrency:
