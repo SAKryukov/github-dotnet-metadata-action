@@ -32,7 +32,8 @@ jobs:
       - name: Prepare metadata 
         working-directory: ./.github/workflows
         run: |
-          dotnet build metadata.targets --target:Metadata       
+          dotnet build metadata.targets --target:Metadata
+          echo "Required data: ${{ env.SourceForPages }}"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5    
