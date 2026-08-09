@@ -1,5 +1,5 @@
 name: .NET Build
-run-name: ".NET Build ${{ github.run_number }} [Trigger: ${{ github.event_name }}]"
+run-name: ".NET Build #${{ github.run_number }} [Trigger: ${{ github.event_name }}]"
 
 on:
   push:
