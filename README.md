@@ -6,4 +6,5 @@ This action creates a software release with a prebuilt product.
 
 [Pages demo](https://sakryukov.github.io/github-dotnet-metadata-action)
 
-[Download Latest Executable Build](https://github.com/SAKryukov/github-dotnet-metadata-action/releases/download/latest-build/Test.full-build.zip)
+[Download Latest Executable Build](https://github.com/SAKryukov/github-dotnet-metadata-action/releases/tag/latest-build)
+<br><small>(All prebuilt executables are built on the GitHub server and are safe.)</small>
