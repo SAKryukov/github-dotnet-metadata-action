@@ -32,10 +32,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
         
-      - name: Prepare metadata 
-        working-directory: ./.github/workflows
-        run: |
-          dotnet build metadata.targets --target:Metadata       
+#      - name: Prepare metadata 
+#        working-directory: ./.github/workflows
+#        run: |
+#          dotnet build metadata.targets --target:Metadata       
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
