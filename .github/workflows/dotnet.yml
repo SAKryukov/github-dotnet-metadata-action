@@ -11,8 +11,6 @@ on:
       - '[0-9]*'
   workflow_dispatch:
   
-# v.2
-
 jobs:
   build:
     runs-on: windows-latest
@@ -63,7 +61,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Purging old historical workflow run records safely..."
-          for run_id in $(gh api repos/${{ github.repository }}/actions/workflows/dotnet.yml/runs | jq -r '.workflow_runs[1:] | .[].id'); do
-            echo "Deleting dotnet run $run_id..."
+          filename=$(basename "${GITHUB_WORKFLOW_REF%@*}")
+          echo "Detected clean file name for API query: $filename"
+          for run_id in $(gh api repos/${{ github.repository }}/actions/workflows/$filename/runs | jq -r '.workflow_runs[1:] | .[].id'); do
+            echo "Deleting old run $run_id..."
             gh api repos/${{ github.repository }}/actions/runs/$run_id -X DELETE || true
           done
