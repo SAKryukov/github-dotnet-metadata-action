@@ -12,7 +12,6 @@ jobs:
   sync-details:
     runs-on: ubuntu-latest
     permissions:
-      administration: write
       actions: write
       contents: write
     steps:
