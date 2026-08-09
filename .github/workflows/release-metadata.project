@@ -4,6 +4,8 @@
   <PropertyGroup> <!-- customize:  -->
   
     <FileName>Test.full-build.zip</FileName>
+    
+    <PagesSource>deploy</PagesSource>
 
     <ReleaseTagName>latest-build</ReleaseTagName>
     <ReleaseName>Latest release build: $(CustomUnifiedVersion)</ReleaseName>
