@@ -3,6 +3,7 @@ run-name: ".NET Build #${{ github.run_number }} [Trigger: ${{ github.event_name 
 
 on:
   push:
+    branches: [ "main" ]
     paths:
       - '.github/workflows/dotnet.yml'
       - 'code/Metadata.props'

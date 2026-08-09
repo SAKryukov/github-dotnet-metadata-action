@@ -3,12 +3,11 @@ run-name: "Pages Deploy #${{ github.run_number }} [Trigger: ${{ github.event_nam
 
 on:
   push:
+    branches: [ "main" ]
     paths:
       - 'deploy/**'
     tags:
       - '[0-9]*'
-  
-  # Trigger 3: Keeps your manual gray "Run workflow" dashboard button active forever
   workflow_dispatch:
 
 permissions:
